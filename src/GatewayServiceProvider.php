@@ -6,7 +6,7 @@ use Sinarajabpour1998\Gateway\Core\TransactionManager;
 use Sinarajabpour1998\Gateway\Facades\Transaction;
 use Illuminate\Support\ServiceProvider;
 
-class TransactionServiceProvider extends ServiceProvider
+class GatewayServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
