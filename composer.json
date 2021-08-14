@@ -1,0 +1,34 @@
+{
+    "name": "sinarajabpour1998/gateway",
+    "type": "library",
+    "description": "",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sina Rajabpour",
+            "email": "sina.rajabpour@outlook.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "7.1.*|7.2.*|7.3.*|7.4.*|8.*",
+        "laravel/framework": "7.*|8.*",
+        "sinarajabpour1998/parsian_ipg": "^1.*",
+        "sinarajabpour1998/pasargad_ipg": "^1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sinarajabpour1998\\Gateway\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sinarajabpour1998\\Gateway\\GatewayServiceProvider"
+            ],
+            "aliases": {
+                "Transaction" : "Sinarajabpour1998\\Gateway\\Facades\\Transaction"
+            }
+        }
+    }
+}
