@@ -10,7 +10,7 @@ return [
     | You can switch to a different driver at runtime.
     |
     */
-    'default' => 'parsian',
+    'default' => 'vandar',
 
     /*
     |--------------------------------------------------------------------------
@@ -24,7 +24,7 @@ return [
     'information' => [
         'parsian' => [
             'constructor' => [
-                'pin' => ''
+                'pin' => env('PARSIAN_PIN', 'nan')
             ],
             'options' => [
 
@@ -32,12 +32,21 @@ return [
         ],
         'pasargad' => [
             'constructor' => [
-                'merchant_code' => '',
-                'terminal_code' => '',
-                'private_key'   => ''
+                'merchant_code' => env('PASARGAD_MERCHANT_CODE', 'nan'),
+                'terminal_code' => env('PASARGAD_TERMINAL_CODE', 'nan'),
+                'private_key'   => env('PASARGAD_PRIVATE_KEY', 'nan')
             ],
             'options' => [
                 'verifySSL' => true
+            ]
+        ],
+        'vandar' => [
+            'constructor' => [
+                'api_key' => env('VANDAR_API_KEY', 'nan'),
+                'test' => false,
+            ],
+            'options' => [
+
             ]
         ],
     ],
@@ -53,7 +62,8 @@ return [
     */
     'drivers' => [
         'parsian' => \Sinarajabpour1998\Gateway\Drivers\Parsian::class,
-        'pasargad' => \Sinarajabpour1998\Gateway\Drivers\Pasargad::class
+        'pasargad' => \Sinarajabpour1998\Gateway\Drivers\Pasargad::class,
+        'vandar' => \Sinarajabpour1998\Gateway\Drivers\Vandar::class
     ],
 
     /*

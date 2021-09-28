@@ -9,7 +9,7 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['order_id', 'status', 'amount', 'driver', 'ref_no', 'token'];
+    protected $fillable = ['order_id', 'status', 'amount', 'driver', 'ref_no', 'token', 'description'];
     protected $appends = ['gateway','toman','status_label'];
 
     public function parent()

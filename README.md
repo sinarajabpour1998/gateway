@@ -15,6 +15,8 @@ A Laravel Package for Payment Gateway Integration.
 - [parsian](https://www.pec.ir/)
 
 - [pasargad](https://bpi.ir/)
+- 
+- [vandar](https://vandar.io/)
 
 
 ## How to install and config [sinarajabpour1998/gateway](https://github.com/sinarajabpour1998/gateway) package?

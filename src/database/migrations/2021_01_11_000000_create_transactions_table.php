@@ -21,6 +21,7 @@ class CreateTransactionsTable extends Migration
             $table->enum('status', ['pending', 'successful', 'failed', 'refunded']);
             $table->string('ref_no')->nullable();
             $table->string('token', 512)->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
