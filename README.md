@@ -146,4 +146,6 @@ php artisan migrate
 
 - PHP v7.0 or above
 - Laravel v7.0 or above
-
+- [parsian_gateway](https://github.com/sinarajabpour1998/parsian_gateway)
+- [pasargad_gateway](https://github.com/sinarajabpour1998/pasargad_gateway)
+- [vandar-laravel](https://github.com/maryamnbyn/vandar-laravel)
