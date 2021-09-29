@@ -15,7 +15,7 @@ A Laravel Package for Payment Gateway Integration.
 - [parsian](https://www.pec.ir/)
 
 - [pasargad](https://bpi.ir/)
-- 
+
 - [vandar](https://vandar.io/)
 
 
@@ -43,43 +43,53 @@ php artisan migrate
 
 - Set the configs in /config/gateway.php
 
-- Use this sample code for Request Payment 
+  - Use this sample code for Request Payment 
 
-    ```php
-    <?php
+      ```php
+      <?php
   
-    // Parsian Driver
-    $transaction = Transaction::driver('parsian')
-            ->amount(2000)
-            ->orderId(2000)
-            ->callbackUrl('callback_parsian')
-            ->detail(['auto_redirect' => false]) // if we want to get {token, url} and not auto redirect to Bank Gateway.
-            ->pay();
+      // Parsian Driver
+      $transaction = Transaction::driver('parsian')
+              ->amount(2000)
+              ->orderId(2000)
+              ->callbackUrl('callback_parsian')
+              ->detail(['auto_redirect' => false]) // if we want to get {token, url} and not auto redirect to Bank Gateway.
+              ->pay();
   
-    // Pasargad Driver
-    $transaction = Transaction::driver('pasargad')
-            ->amount(2000)
-            ->orderId(2000)
-            ->callbackUrl('callback_pasargad')
-            ->detail(['auto_redirect' => false]) // if we want to get {token, url} and not auto redirect to Bank Gateway.
-            ->pay();
+      // Pasargad Driver
+      $transaction = Transaction::driver('pasargad')
+              ->amount(2000)
+              ->orderId(2000)
+              ->callbackUrl('callback_pasargad')
+              ->detail(['auto_redirect' => false]) // if we want to get {token, url} and not auto redirect to Bank Gateway.
+              ->pay();
+      // Vandar Driver
+      $transaction = Transaction::driver('vandar')
+              ->amount(2000)
+              ->orderId(2000)
+              ->callbackUrl('callback_vandar')
+              ->detail(['auto_redirect' => false]) // if we want to get {token, url} and not auto redirect to Bank Gateway.
+              ->pay();
 
-    ```
+      ```
   
-- Use this sample code for Verify Payment
+    - Use this sample code for Verify Payment
 
-    ```php
-    // Parsian Driver, that use POST type
-    Route::post('/callback_parsian', function () {
-        $verify = Transaction::driver('parsian')->request(request()->all())->verify();
-    });
+        ```php
+        // Parsian Driver, that use POST type
+        Route::post('/callback_parsian', function () {
+            $verify = Transaction::driver('parsian')->request(request()->all())->verify();
+        });
     
-    // Pasargad Driver, that use GET type
-    Route::get('/callback_pasargad', function () {
-        $verify = Transaction::driver('pasargad')->request(request()->all())->verify();
-    });
-
-    ```
+        // Pasargad Driver, that use GET type
+        Route::get('/callback_pasargad', function () {
+            $verify = Transaction::driver('pasargad')->request(request()->all())->verify();
+        });
+      
+        // Vandar Driver, that use GET type
+        request()->merge(['transId' => $order->transaction->id]);
+        $result = Transaction::driver('vandar')->request(request()->all())->verify();
+      ```
 
 - Use this Trait in you'r Model (for example Payment, Invoice, Order, ...) that has many transactions and has relation with Transaction Model
 
@@ -96,6 +106,7 @@ php artisan migrate
     }
   
     // After add the Trait we can use this relations
+    $order->transaction; // get latest transaction from this order
     $order->transactions; // get the all transactions for this order
     $order->pendingTransactions; // get the pending transactions for this order
     $order->successfulTransactions; // get the successful transactions for this order
