@@ -11,6 +11,11 @@ trait HasTransaction
         return $this->hasMany(Transaction::class, 'order_id');
     }
 
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class, 'order_id')->latest();
+    }
+
     public function pendingTransactions()
     {
         return $this->hasMany(Transaction::class, 'order_id')->where('status', 'pending');

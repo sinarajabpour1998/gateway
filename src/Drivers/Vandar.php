@@ -26,7 +26,7 @@ class Vandar extends Driver
             $given_result->url = 'https://ipg.vandar.io/v3/' . $result['token'];
             return $given_result;
 
-        } elseif($result->status == 'success') {
+        } elseif($result['status'] == 1 && $detail['auto_redirect'] == true) {
             header( 'Location: https://ipg.vandar.io/v3/' . $result['token']);
             die();
         }
@@ -37,7 +37,7 @@ class Vandar extends Driver
     public function verify($request)
     {
         $result = VandarFacade::verify($request['token']);
-
+        
         if ($result['status'] == 1) {
             if ($result['message'] == 'ok') {
                 $this->updateTransactionData($result['factorNumber'], ['status' => 'successful', 'ref_no' => $result['transId']]);
@@ -45,11 +45,11 @@ class Vandar extends Driver
                 $this->updateTransactionData($result['factorNumber'], ['status' => 'failed', 'ref_no' => $result['transId']]);
             }
             return $result;
-        }
 
-        if ($result['status'] == 3){
-            dd($request['transaction_id']);
-            $this->updateTransactionData($request['transaction_id'], ['status' => 'failed', 'description' => $result['errors'][0]]);
+        }elseif ($result['status'] == 0){
+            $this->updateTransactionData($request['transId'], ['status' => 'failed', 'description' => $result['error']]);
+        }elseif ($result['status'] == 3){
+            $this->updateTransactionData($request['transId'], ['status' => 'failed', 'description' => $result['errors'][0]]);
         }
         return $result;
     }
