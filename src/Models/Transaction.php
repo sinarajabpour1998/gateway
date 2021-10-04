@@ -10,7 +10,7 @@ class Transaction extends Model
     use HasFactory;
 
     protected $fillable = ['order_id', 'status', 'amount', 'driver', 'ref_no', 'token', 'description'];
-    protected $appends = ['gateway','toman','status_label'];
+    protected $appends = ['gateway','toman','status_label','status_badge'];
 
     public function parent()
     {
@@ -22,7 +22,7 @@ class Transaction extends Model
         switch ($this->driver) {
             case 'pasargad':
                 return 'بانک پاسارگاد';
-            case 'parsian' :
+            case 'parsian':
                 return 'بانک پارسیان';
             default:
                 return 'نامشخص';
@@ -47,6 +47,22 @@ class Transaction extends Model
                 return 'موفقیت‌آمیز';
             default:
                 return 'نامشخص';
+        }
+    }
+
+    public function getStatusBadgeAttribute()
+    {
+        switch ($this->status) {
+            case 'pending':
+                return 'badge-warning';
+            case 'failed':
+                return 'badge-danger';
+            case 'refunded':
+                return 'badge-dark';
+            case 'successful':
+                return 'badge-success';
+            case 'default':
+                return 'badge-light';
         }
     }
 }
