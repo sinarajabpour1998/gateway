@@ -4,8 +4,8 @@
 [![GitHub stars](https://img.shields.io/github/stars/sinarajabpour1998/gateway?style=flat-square)](https://github.com/sinarajabpour1998/gateway/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/sinarajabpour1998/gateway?style=flat-square)](https://github.com/sinarajabpour1998/gateway/network)
 [![Total Downloads](https://img.shields.io/packagist/dt/sinarajabpour1998/gateway.svg?style=flat-square)](https://packagist.org/packages/sinarajabpour1998/gateway)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sinarajabpour1998/gateway/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/sinarajabpour1998/gateway/?branch=main)
-[![Build Status](https://scrutinizer-ci.com/g/sinarajabpour1998/gateway/badges/build.png?b=main)](https://scrutinizer-ci.com/g/sinarajabpour1998/gateway/build-status/main)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sinarajabpour1998/gateway/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sinarajabpour1998/gateway/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/sinarajabpour1998/gateway/badges/build.png?b=master)](https://scrutinizer-ci.com/g/sinarajabpour1998/gateway/build-status/master)
 [![GitHub license](https://img.shields.io/github/license/sinarajabpour1998/gateway?style=flat-square)](https://github.com/sinarajabpour1998/gateway/blob/master/LICENSE)
 
 A Laravel Package for Payment Gateway Integration.
