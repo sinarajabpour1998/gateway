@@ -14,21 +14,19 @@ class Vandar extends Driver
 
         $result = VandarFacade::request($amount, $callbackUrl, null, $orderId, null);
 
-        //$amount, $transaction->id, $transaction->created_at->format('Y/m/d H:i:s'), $callbackUrl
-
         $given_result = (object) array('token' => '', 'url' => '');
 
         if ($result['status'] == 1){
             $this->updateTransactionData($transaction->id, ['token' => $result['token']]);
-        }
-        if(isset($detail['auto_redirect']) && $detail['auto_redirect'] == false && $result['status'] == 1) {
-            $given_result->token = $result['token'];
-            $given_result->url = 'https://ipg.vandar.io/v3/' . $result['token'];
-            return $given_result;
+            if(isset($detail['auto_redirect']) && $detail['auto_redirect'] == false) {
+                $given_result->token = $result['token'];
+                $given_result->url = 'https://ipg.vandar.io/v3/' . $result['token'];
+                return $given_result;
 
-        } elseif($result['status'] == 1 && $detail['auto_redirect'] == true) {
-            header( 'Location: https://ipg.vandar.io/v3/' . $result['token']);
-            die();
+            } else {
+                header( 'Location: https://ipg.vandar.io/v3/' . $result['token']);
+                die();
+            }
         }
 
         return $result;
