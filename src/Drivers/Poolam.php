@@ -12,7 +12,6 @@ class Poolam extends Driver
         // Create new transaction
         $transaction = $this->createNewTransaction($orderId, $amount);
 
-        // $amount, $transaction->id, $transaction->created_at->format('Y/m/d H:i:s'), $callbackUrl
         $result = $this->payment_request($amount, $callbackUrl);
 
         if(isset($detail['auto_redirect']) && $detail['auto_redirect'] == false && $result['status'] == 1) {

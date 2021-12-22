@@ -17,7 +17,7 @@ A Laravel Package for Payment Gateway Integration.
 - [pasargad](https://bpi.ir/)
 
 - [vandar](https://vandar.io/)
-- 
+
 - [poolam](https://poolam.ir/fa/)
 
 
