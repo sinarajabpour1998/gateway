@@ -10,7 +10,7 @@ return [
     | You can switch to a different driver at runtime.
     |
     */
-    'default' => 'vandar',
+    'default' => 'poolam',
 
     /*
     |--------------------------------------------------------------------------
@@ -49,6 +49,16 @@ return [
 
             ]
         ],
+        'poolam' => [
+            'constructor' => [
+                'api_url' => env('POOLAM_API_URL', 'nan'),
+                'api_key' => env('POOLAM_API_KEY', 'nan'),
+                'test' => false,
+            ],
+            'options' => [
+
+            ]
+        ],
     ],
 
     /*
@@ -63,7 +73,8 @@ return [
     'drivers' => [
         'parsian' => \Sinarajabpour1998\Gateway\Drivers\Parsian::class,
         'pasargad' => \Sinarajabpour1998\Gateway\Drivers\Pasargad::class,
-        'vandar' => \Sinarajabpour1998\Gateway\Drivers\Vandar::class
+        'vandar' => \Sinarajabpour1998\Gateway\Drivers\Vandar::class,
+        'poolam' => \Sinarajabpour1998\Gateway\Drivers\Poolam::class
     ],
 
     /*

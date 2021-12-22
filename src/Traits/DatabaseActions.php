@@ -24,6 +24,6 @@ trait DatabaseActions
 
     protected function getTransaction($transactionId)
     {
-        return Transaction::query()->find($transactionId);
+        return Transaction::query()->where('id', $transactionId)->first();
     }
 }
