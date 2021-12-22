@@ -2,7 +2,6 @@
 
 namespace Sinarajabpour1998\Gateway\Drivers;
 
-use Illuminate\Support\Facades\Auth;
 use Sinarajabpour1998\Gateway\Abstracts\Driver;
 
 class Poolam extends Driver
@@ -16,6 +15,7 @@ class Poolam extends Driver
 
         if(isset($detail['auto_redirect']) && $detail['auto_redirect'] == false && $result['status'] == 1) {
             $result['token'] = $result['invoice_key'];
+            $this->updateTransactionData($transaction->id, ['token' => $result['invoice_key']]);
             $result['url'] = config('gateway.information')['poolam']['constructor']['api_url'] . "pay/" . $result['token'];
             return $result;
 
@@ -32,15 +32,15 @@ class Poolam extends Driver
     public function verify($request)
     {
         $check = $this->check_payment($request['invoice_key']);
-        $transaction = $this->getTransaction($request['invoice_key']);
-
+        $transaction = $this->getTransactionByToken($request['invoice_key']);
+        $check['order'] = null;
         if (!is_null($transaction)) {
-            if ($check['status'] == 1 && $transaction->parent->user->id == Auth::user()->id) {
+            $check['order'] = $transaction->parent;
+            if ($check['status'] == 1) {
                 $this->updateTransactionData($transaction->id, ['status' => 'successful', 'ref_no' => $check['bank_code']]);
-                return $result;
+            }else {
+                $this->updateTransactionData($transaction->id, ['status' => 'failed', 'ref_no' => $check['errorCode'], 'description' => $check['errorDescription']]);
             }
-
-            $this->updateTransactionData($transaction->id, ['status' => 'failed', 'ref_no' => $result['errorCode'], 'description' => $result['errorDescription']]);
         }
         return $check;
     }

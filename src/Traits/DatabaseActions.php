@@ -26,4 +26,9 @@ trait DatabaseActions
     {
         return Transaction::query()->where('id', $transactionId)->first();
     }
+
+    protected function getTransactionByToken($token)
+    {
+        return Transaction::query()->where('token', $token)->first();
+    }
 }
