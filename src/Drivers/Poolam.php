@@ -16,12 +16,12 @@ class Poolam extends Driver
 
         if(isset($detail['auto_redirect']) && $detail['auto_redirect'] == false && $result['status'] == 1) {
             $result['token'] = $result['invoice_key'];
-            $result['url'] = config('gateway.information')['poolam']['api_url'] . "pay/" . $result['token'];
+            $result['url'] = config('gateway.information')['poolam']['constructor']['api_url'] . "pay/" . $result['token'];
             return $result;
 
         } elseif($result['status'] == 1) {
             $this->updateTransactionData($transaction->id, ['token' => $result['invoice_key']]);
-            header( 'Location: ' . config('gateway.information')['poolam']['api_url'] . "pay/" . $result['invoice_key']);
+            header( 'Location: ' . config('gateway.information')['poolam']['constructor']['api_url'] . "pay/" . $result['invoice_key']);
             die();
 
         }
@@ -47,8 +47,8 @@ class Poolam extends Driver
 
     protected function check_payment($inv_key){
         $ch = curl_init();
-        curl_setopt($ch,CURLOPT_URL,config('gateway.information')['poolam']['api_url'] . 'check/'.$inv_key);
-        curl_setopt($ch,CURLOPT_POSTFIELDS,"api_key=" . config('gateway.information')['poolam']['api_key']);
+        curl_setopt($ch,CURLOPT_URL,config('gateway.information')['poolam']['constructor']['api_url'] . 'check/'.$inv_key);
+        curl_setopt($ch,CURLOPT_POSTFIELDS,"api_key=" . config('gateway.information')['poolam']['constructor']['api_key']);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $res = curl_exec($ch);
@@ -58,8 +58,8 @@ class Poolam extends Driver
 
     protected function payment_request($amount,$redirect){
         $ch = curl_init();
-        curl_setopt($ch,CURLOPT_URL,config('gateway.information')['poolam']['api_url'] . 'request');
-        curl_setopt($ch,CURLOPT_POSTFIELDS,"api_key=" . config('gateway.information')['poolam']['api_key'] . "&amount=$amount&return_url=$redirect");
+        curl_setopt($ch,CURLOPT_URL,config('gateway.information')['poolam']['constructor']['api_url'] . 'request');
+        curl_setopt($ch,CURLOPT_POSTFIELDS,"api_key=" . config('gateway.information')['poolam']['constructor']['api_key'] . "&amount=$amount&return_url=$redirect");
         curl_setopt($ch,CURLOPT_SSL_VERIFYPEER, FALSE);
         curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
         $res = curl_exec($ch);
